@@ -42,11 +42,6 @@ export const handleApiError = (error: unknown): ApiError => {
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError<ApiResponse>;
 
-    if (axiosError.response?.status === 401) {
-      localStorage.removeItem('user');
-      // Feat: Redirect to login page can be handled here
-    }
-
     if (axiosError.response?.data) {
       const apiResponse = axiosError.response.data;
       return {
