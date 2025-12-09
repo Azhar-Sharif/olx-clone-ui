@@ -76,3 +76,7 @@ export const getApiResponseData = <T>(response: ApiResponse<T>): T | null => {
 export const isApiResponseSuccess = (response: ApiResponse): boolean => {
   return response.success === true;
 };
+
+export const getApiResponseMessage = (response: ApiResponse): string | null => {
+  return response.message || null;
+};
