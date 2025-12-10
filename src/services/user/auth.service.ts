@@ -20,7 +20,6 @@ export const authApi = {
         '/user/login/',
         credentials,
       );
-      console.log('Login Response Raw :', response);
       if (isApiResponseSuccess(response.data)) {
         const authData = getApiResponseData(response.data);
         if (authData) {

@@ -5,11 +5,11 @@ export interface LoginRequest {
 
 export interface RegisterRequest {
   username: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone_no: string;
-  address: string;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_no?: string;
+  address?: string;
   password: string;
 }
 
