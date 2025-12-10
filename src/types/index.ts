@@ -1,24 +1,24 @@
-import { ApiError, ApiResponse } from './api.types';
+import { ApiError, ApiResponse } from '@custom_types/api.types';
 import {
   AuthResponse,
   LoginRequest,
   RegisterRequest,
   User,
-} from './auth.types';
-import { Category } from './category.types';
+} from '@custom_types/auth.types';
+import { Category } from '@custom_types/category.types';
 import {
   CreateOrderRequest,
   Order,
   OrderListResponse,
   OrderProductInput,
   UpdateOrderRequest,
-} from './order.types';
+} from '@custom_types/order.types';
 import {
   CreateProductRequest,
   Product,
   ProductListResponse,
   UpdateProductRequest,
-} from './product.types';
+} from '@custom_types/product.types';
 
 export type {
   ApiError,
