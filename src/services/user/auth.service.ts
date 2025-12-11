@@ -16,7 +16,7 @@ import {
 export const authApi = {
   login: async (credentials: LoginRequest): Promise<AuthResponse> => {
     try {
-      const response = await apiClient.post<ApiResponse<AuthResponse>>(
+      const response = await apiClient.post<ApiResponse>(
         '/user/login/',
         credentials,
       );
@@ -34,7 +34,7 @@ export const authApi = {
 
   register: async (userData: RegisterRequest): Promise<AuthResponse> => {
     try {
-      const response = await apiClient.post<ApiResponse<AuthResponse>>(
+      const response = await apiClient.post<ApiResponse>(
         '/user/register/',
         userData,
       );
