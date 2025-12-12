@@ -1,9 +1,9 @@
-export interface LoginRequest {
+export interface ILoginRequest {
   username: string;
   password: string;
 }
 
-export interface RegisterRequest {
+export interface IRegisterRequest {
   username: string;
   email?: string;
   first_name?: string;
@@ -13,7 +13,7 @@ export interface RegisterRequest {
   password: string;
 }
 
-export interface User {
+export interface IUser {
   id: number;
   username: string;
   email?: string;
@@ -23,7 +23,7 @@ export interface User {
   address?: string;
 }
 
-export interface AuthResponse {
-  user: User;
+export interface IAuthResponse {
+  user: IUser;
   message?: string;
 }

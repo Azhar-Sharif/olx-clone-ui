@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   id: number;
   product_name: string;
   description: string;
@@ -13,7 +13,7 @@ export interface Product {
   updated_at?: string;
 }
 
-export interface CreateProductRequest {
+export interface ICreateProductRequest {
   product_name: string;
   description: string;
   price: string;
@@ -22,8 +22,8 @@ export interface CreateProductRequest {
   category: number;
 }
 
-export interface UpdateProductRequest extends Partial<CreateProductRequest> {}
+export interface IUpdateProductRequest extends Partial<ICreateProductRequest> {}
 
-export interface ProductListResponse {
-  data: Product[];
+export interface IProductListResponse {
+  data: IProduct[];
 }
