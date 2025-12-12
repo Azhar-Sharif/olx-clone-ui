@@ -1,10 +1,7 @@
+import { AuthPage } from '@components/pages';
+
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <h1 className="text-3xl font-bold text-emerald-600">
-        OLX Clone Frontend
-      </h1>
-    </div>
-  );
+  return <AuthPage />;
 }
+
 export default App;
