@@ -1,2 +1,2 @@
+export * from './authSlice';
 export * from './redux';
-export * from './slices';
