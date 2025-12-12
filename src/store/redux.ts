@@ -1,0 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+
+import { authReducer } from '@store';
+
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+  devTools: import.meta.env.MODE !== 'production',
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export const useAppSelector = (selector: (_state: RootState) => any) =>
+  useSelector(selector);
