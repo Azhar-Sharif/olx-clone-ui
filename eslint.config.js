@@ -79,7 +79,7 @@ export default [
               '^@components',
               '^@assets',
               '^@utils',
-              '^@types',
+              '^@typings',
               '^@store',
               '^@hooks',
               '^@services',
