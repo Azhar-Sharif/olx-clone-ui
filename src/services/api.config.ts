@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-import { ApiResponse, ApiError } from '@custom_types/';
+import type * as Types from '@types';
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
@@ -14,9 +14,9 @@ export const apiClient: AxiosInstance = axios.create({
   },
 });
 
-export const handleApiError = (error: unknown): ApiError => {
+export const handleApiError = (error: unknown): Types.IApiError => {
   if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<ApiResponse>;
+    const axiosError = error as AxiosError<Types.IApiResponse>;
 
     if (axiosError.response?.data) {
       const apiResponse = axiosError.response.data;
@@ -45,14 +45,18 @@ export const handleApiError = (error: unknown): ApiError => {
   };
 };
 
-export const getApiResponseData = <T>(response: ApiResponse<T>): T | null => {
+export const getApiResponseData = (
+  response: Types.IApiResponse,
+): any | null => {
   return response.data || null;
 };
 
-export const isApiResponseSuccess = (response: ApiResponse): boolean => {
+export const isApiResponseSuccess = (response: Types.IApiResponse): boolean => {
   return response.success === true;
 };
 
-export const getApiResponseMessage = (response: ApiResponse): string | null => {
+export const getApiResponseMessage = (
+  response: Types.IApiResponse,
+): string | null => {
   return response.message || null;
 };

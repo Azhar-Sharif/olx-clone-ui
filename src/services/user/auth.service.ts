@@ -1,9 +1,4 @@
-import type {
-  ApiResponse,
-  AuthResponse,
-  LoginRequest,
-  RegisterRequest,
-} from '@custom_types/';
+import type * as Types from '@types';
 
 import {
   apiClient,
@@ -11,12 +6,14 @@ import {
   getApiResponseMessage,
   handleApiError,
   isApiResponseSuccess,
-} from '@services/api.config';
+} from '@services';
 
 export const authApi = {
-  login: async (credentials: LoginRequest): Promise<AuthResponse> => {
+  login: async (
+    credentials: Types.ILoginRequest,
+  ): Promise<Types.IAuthResponse> => {
     try {
-      const response = await apiClient.post<ApiResponse>(
+      const response = await apiClient.post<Types.IApiResponse>(
         '/user/login/',
         credentials,
       );
@@ -32,9 +29,11 @@ export const authApi = {
     }
   },
 
-  register: async (userData: RegisterRequest): Promise<AuthResponse> => {
+  register: async (
+    userData: Types.IRegisterRequest,
+  ): Promise<Types.IAuthResponse> => {
     try {
-      const response = await apiClient.post<ApiResponse>(
+      const response = await apiClient.post<Types.IApiResponse>(
         '/user/register/',
         userData,
       );
@@ -52,7 +51,8 @@ export const authApi = {
 
   logout: async (): Promise<string | null> => {
     try {
-      const response = await apiClient.post<ApiResponse>('/user/logout/');
+      const response =
+        await apiClient.post<Types.IApiResponse>('/user/logout/');
       if (isApiResponseSuccess(response.data)) {
         const message = getApiResponseMessage(response.data);
         return message;
