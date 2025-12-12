@@ -1,7 +1,11 @@
-import { AuthPage } from '@components/pages';
+import { AppRoutes } from '@routes';
 
 function App() {
-  return <AuthPage />;
+  return (
+    <div className="app">
+      <AppRoutes />
+    </div>
+  );
 }
 
 export default App;
