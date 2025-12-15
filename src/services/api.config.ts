@@ -1,10 +1,19 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-import type * as Types from '@types';
+import { IApiResponse, IApiError } from '@types';
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10);
+
+const getCsrfToken = (): string | null => {
+  return (
+    document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='))
+      ?.split('=')[1] ?? null
+  );
+};
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -12,11 +21,26 @@ export const apiClient: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
-export const handleApiError = (error: unknown): Types.IApiError => {
+apiClient.interceptors.request.use((config) => {
+  const csrfToken = getCsrfToken();
+
+  if (
+    csrfToken &&
+    config.method &&
+    ['post', 'put', 'patch', 'delete'].includes(config.method)
+  ) {
+    config.headers['X-CSRFToken'] = csrfToken;
+  }
+
+  return config;
+});
+
+export const handleApiError = (error: unknown): IApiError => {
   if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<Types.IApiResponse>;
+    const axiosError = error as AxiosError<IApiResponse>;
 
     if (axiosError.response?.data) {
       const apiResponse = axiosError.response.data;
@@ -45,18 +69,14 @@ export const handleApiError = (error: unknown): Types.IApiError => {
   };
 };
 
-export const getApiResponseData = (
-  response: Types.IApiResponse,
-): any | null => {
+export const getApiResponseData = (response: IApiResponse) => {
   return response.data || null;
 };
 
-export const isApiResponseSuccess = (response: Types.IApiResponse): boolean => {
+export const isApiResponseSuccess = (response: IApiResponse): boolean => {
   return response.success === true;
 };
 
-export const getApiResponseMessage = (
-  response: Types.IApiResponse,
-): string | null => {
-  return response.message || null;
+export const getApiResponseMessage = (response: IApiResponse): string => {
+  return response.message || '';
 };
