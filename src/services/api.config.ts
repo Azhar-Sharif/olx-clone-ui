@@ -2,40 +2,19 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 
 import { IApiResponse, IApiError } from '@types';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
-const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10);
+import { getApiConfig } from '@configurations';
 
-const getCsrfToken = (): string | null => {
-  return (
-    document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='))
-      ?.split('=')[1] ?? null
-  );
-};
-
+const { baseUrl, timeout } = getApiConfig();
 export const apiClient: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: API_TIMEOUT,
+  baseURL: baseUrl,
+  timeout: timeout,
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
-});
-
-apiClient.interceptors.request.use((config) => {
-  const csrfToken = getCsrfToken();
-
-  if (
-    csrfToken &&
-    config.method &&
-    ['post', 'put', 'patch', 'delete'].includes(config.method)
-  ) {
-    config.headers['X-CSRFToken'] = csrfToken;
-  }
-
-  return config;
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFToken',
+  withXSRFToken: true,
 });
 
 export const handleApiError = (error: unknown): IApiError => {
