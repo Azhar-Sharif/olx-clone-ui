@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { publicRoutes } from '@routes';
+import { ArrowLeft } from 'lucide-react';
 
 import { Logo } from '@components/atoms';
 import { AuthForm } from '@components/compounds';
@@ -15,7 +16,7 @@ export const AuthPage = ({ type }: IAuthPageProps) => {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   const handleSuccess = () => {
-    navigate(publicRoutes.home);
+    navigate('/products');
   };
 
   const handleBackToHome = () => {
@@ -24,7 +25,7 @@ export const AuthPage = ({ type }: IAuthPageProps) => {
   };
 
   if (isAuthenticated) {
-    navigate(publicRoutes.home);
+    navigate('/products');
   }
 
   return (
@@ -51,21 +52,9 @@ export const AuthPage = ({ type }: IAuthPageProps) => {
         <div className="text-center mt-6">
           <button
             onClick={handleBackToHome}
-            className="text-slate-600 hover:text-slate-900 text-sm flex items-center justify-center mx-auto transition-colors"
+            className="text-slate-600 hover:text-slate-900 text-sm flex items-center justify-center mx-auto transition-colors gap-1"
           >
-            <svg
-              className="w-4 h-4 mr-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+            <ArrowLeft size={16} />
             Back to Home
           </button>
         </div>
