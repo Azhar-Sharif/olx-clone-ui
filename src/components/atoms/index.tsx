@@ -5,3 +5,4 @@ export * from './FormField';
 export * from './FormFooter';
 export * from './Input';
 export * from './Logo';
+export * from './ProductCard';

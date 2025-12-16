@@ -9,6 +9,8 @@ export const publicRoutes = {
   home: '/',
   login: '/login',
   register: '/register',
+  products: '/products',
+  productDetail: (id: string) => `/product/${id}`,
 };
 
 export const errorRoutes = {
