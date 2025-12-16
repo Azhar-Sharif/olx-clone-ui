@@ -1,29 +1,30 @@
 export interface IProduct {
   id: number;
-  product_name: string;
-  description: string;
-  price: string;
+  product_name?: string;
   quantity: number;
+  description?: string;
+  price?: number;
+  product_img?: File | null;
+  product_img_url?: string | null;
+  created_at?: string;
+  user_name: string;
   category: number;
   category_name: string;
-  user_name: string;
-  product_img?: string | File;
-  product_img_url?: string;
-  created_at?: string;
-  updated_at?: string;
 }
 
-export interface ICreateProductRequest {
-  product_name: string;
-  description: string;
-  price: string;
-  quantity: number;
+export interface IProductRequest {
+  product_name?: string;
+  quantity?: number;
+  description?: string;
+  price?: number;
   product_img?: File;
-  category: number;
+  category?: number;
 }
 
-export interface IUpdateProductRequest extends Partial<ICreateProductRequest> {}
-
-export interface IProductListResponse {
-  data: IProduct[];
+export interface IProductResponse {
+  success: boolean;
+  message: string;
+  data: IProduct | IProduct[] | null;
+  errors?: Record<string, string[]>;
+  status_code: number;
 }
