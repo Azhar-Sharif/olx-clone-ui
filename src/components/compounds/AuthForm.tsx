@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import type * as Types from '@types';
 
 import { Button, FormError, FormFooter } from '@components/atoms';
 import { LoginFormFields, RegisterFormFields } from '@components/molecules';
+import { validateLoginForm, validateRegisterForm } from '@utils';
+import type * as Types from '@types';
 import {
   clearError,
   loginUser,
@@ -35,30 +36,13 @@ export const AuthForm = ({ type, onSubmitSuccess }: IAuthFormProps) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (type === 'register') {
-      if (!formData.username.trim())
-        newErrors.username = 'Username is required';
-      if (!formData.password) newErrors.password = 'Password is required';
-      if (formData.password.length < 8)
-        newErrors.password = 'Password must be at least 8 characters';
-      if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = 'Passwords do not match';
-      }
-      if (!formData.agreeTerms)
-        newErrors.agreeTerms = 'You must agree to terms';
-      if (
-        formData.email &&
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-      ) {
-        newErrors.email = 'Please enter a valid email';
-      }
-    } else {
-      if (!formData.username.trim())
-        newErrors.username = 'Username is required';
-      if (!formData.password) newErrors.password = 'Password is required';
-    }
+    const newErrors =
+      type === 'register'
+        ? validateRegisterForm(formData)
+        : validateLoginForm({
+            username: formData.username,
+            password: formData.password,
+          });
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
