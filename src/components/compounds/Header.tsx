@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LogIn, LogOut, Package, Search, ShoppingCart } from 'lucide-react';
+import { LogIn, LogOut, ShoppingCart, User } from 'lucide-react';
 
 import { logoutUser, useAppDispatch, useAppSelector } from '@store';
 
@@ -22,8 +22,8 @@ export const Header = () => {
     navigate('/cart');
   };
 
-  const handleOrdersClick = () => {
-    navigate('/orders');
+  const handleProfileClick = () => {
+    navigate('/profile');
   };
 
   return (
@@ -37,13 +37,9 @@ export const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
-            <Search size={20} />
-            <span className="hidden sm:inline">Search</span>
-          </button>
           <button
             onClick={handleCartClick}
-            className="text-gray-600 hover:text-gray-900 flex items-center gap-2 relative"
+            className="text-gray-600 hover:text-gray-900 flex items-center gap-2 relative transition-colors"
           >
             <ShoppingCart size={20} />
             {cartItemCount > 0 && (
@@ -57,15 +53,15 @@ export const Header = () => {
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               <button
-                onClick={handleOrdersClick}
-                className="text-gray-600 hover:text-gray-900 flex items-center gap-2"
+                onClick={handleProfileClick}
+                className="text-gray-600 hover:text-gray-900 flex items-center gap-2 transition-colors"
               >
-                <Package size={20} />
-                <span className="hidden sm:inline">Orders</span>
+                <User size={20} />
+                <span className="hidden sm:inline">Profile</span>
               </button>
               <span className="text-gray-300">|</span>
-              <span className="text-gray-700 font-medium">
-                {user?.email || 'User'}
+              <span className="text-gray-700 font-medium text-sm">
+                {user?.username || user?.email || 'User'}
               </span>
               <button
                 onClick={handleLogout}
@@ -79,7 +75,7 @@ export const Header = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleAuthClick}
-                className="text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1"
+                className="text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1 transition-colors"
               >
                 <LogIn size={18} />
                 <span className="hidden sm:inline">Login</span>
@@ -87,7 +83,7 @@ export const Header = () => {
               <span className="text-gray-300">|</span>
               <button
                 onClick={() => navigate('/register')}
-                className="text-gray-600 hover:text-gray-900 font-medium"
+                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
                 Register
               </button>
