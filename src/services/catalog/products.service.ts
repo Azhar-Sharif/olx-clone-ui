@@ -41,9 +41,7 @@ export const productService = {
     }
   },
 
-  createProduct: async (
-    data: Record<string, any>,
-  ): Promise<IProductResponse> => {
+  createProduct: async (data: Record<string, any>): Promise<IApiResponse> => {
     try {
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
@@ -61,13 +59,7 @@ export const productService = {
           },
         },
       );
-      if (isApiResponseSuccess(response.data)) {
-        const productData = getApiResponseData(response.data);
-        if (productData) {
-          return productData;
-        }
-      }
-      throw new Error(response.data.message || 'Product creation failed');
+      return response.data;
     } catch (error) {
       throw handleApiError(error);
     }
