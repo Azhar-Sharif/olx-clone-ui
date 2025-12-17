@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type * as Types from '@types';
 
+import type * as Types from '@types';
 import { authApi } from '@services';
+
+import { clearCart } from './cartSlice';
 
 interface AuthState {
   user: Types.IUser | null | undefined;
@@ -41,9 +43,11 @@ export const loginUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
-      return await authApi.logout();
+      const response = await authApi.logout();
+      dispatch(clearCart());
+      return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
