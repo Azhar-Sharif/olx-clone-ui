@@ -29,8 +29,8 @@ export const readFileAsDataURL = (file: File): Promise<string> =>
   });
 
 export const getResultMessage = (result: any): string | null => {
-  if (result.payload?.success && result.payload?.data) {
-    return null;
+  if (result.success) {
+    return 'Product Posted successfully';
   }
 
   if (result.payload?.message) {
