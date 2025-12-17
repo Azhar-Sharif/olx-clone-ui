@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LogIn, LogOut, ShoppingCart, User } from 'lucide-react';
+import { LogIn, LogOut, Plus, ShoppingCart, User } from 'lucide-react';
 
 import { logoutUser, useAppDispatch, useAppSelector } from '@store';
 
@@ -24,6 +24,10 @@ export const Header = () => {
 
   const handleProfileClick = () => {
     navigate('/profile');
+  };
+
+  const handlePostProductClick = () => {
+    navigate('/post-product');
   };
 
   return (
@@ -52,6 +56,13 @@ export const Header = () => {
 
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
+              <button
+                onClick={handlePostProductClick}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              >
+                <Plus size={18} />
+                <span className="hidden sm:inline">Post Product</span>
+              </button>
               <button
                 onClick={handleProfileClick}
                 className="text-gray-600 hover:text-gray-900 flex items-center gap-2 transition-colors"

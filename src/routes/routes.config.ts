@@ -18,6 +18,7 @@ export const protectedRoutes = {
   checkout: '/checkout',
   orders: '/orders',
   orderDetail: (id: string) => `/orders/${id}`,
+  postProduct: '/post-product',
   profile: '/profile',
 };
 

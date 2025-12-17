@@ -7,6 +7,7 @@ import {
   HomePage,
   OrderDetailPage,
   OrdersPage,
+  PostProductPage,
   ProductDetailPage,
   ProductsPage,
   ProfilePage,
@@ -28,6 +29,14 @@ export const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <CheckoutPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/post-product"
+      element={
+        <ProtectedRoute>
+          <PostProductPage />
         </ProtectedRoute>
       }
     />
