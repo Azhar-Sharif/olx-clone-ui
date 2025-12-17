@@ -15,22 +15,17 @@ export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { products, isLoading, error } = useAppSelector(
     (state) => state.products,
   );
 
-  const product = products.find((p) => p.id === parseInt(id || '0'));
+  const product = products.find((p: any) => p.id === parseInt(id || '0'));
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
     if (!product && id) {
       dispatch(fetchProductById(parseInt(id)) as any);
     }
-  }, [dispatch, isAuthenticated, navigate, id, product]);
+  }, [dispatch, id, product]);
 
   if (isLoading) {
     return (

@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Header } from '@components/compounds';
 import { CategoryFilter, ProductGrid } from '@components/molecules';
 import { fetchProducts, useAppDispatch, useAppSelector } from '@store';
 
 export const ProductsPage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { products, isLoading, error } = useAppSelector(
     (state) => state.products,
   );
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   const [activeCategory, setActiveCategory] = useState('all');
   const categories = Array.from(
@@ -24,13 +21,8 @@ export const ProductsPage = () => {
   );
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
-
     dispatch(fetchProducts() as any);
-  }, [dispatch, isAuthenticated, navigate]);
+  }, [dispatch]);
 
   const filteredProducts =
     activeCategory === 'all'
