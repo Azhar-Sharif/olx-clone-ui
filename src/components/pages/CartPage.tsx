@@ -3,7 +3,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 
-import { Button } from '@components/atoms';
+import { Button, EmptyState } from '@components/atoms';
+import { Header } from '@components/compounds';
 import { CartItemCard, OrderSummary } from '@components/molecules';
 import {
   clearCart,
@@ -54,8 +55,9 @@ export const CartPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
             <ShoppingCart size={32} />
@@ -69,28 +71,20 @@ export const CartPage: React.FC = () => {
         </div>
 
         {items.length === 0 ? (
-          <div className="bg-white rounded-lg p-12 text-center">
-            <ShoppingCart size={48} className="mx-auto text-gray-400 mb-4" />
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-              Your cart is empty
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Add some products to your cart to get started
-            </p>
-            <Button
-              onClick={handleContinueShopping}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
-            >
-              Continue Shopping
-            </Button>
-          </div>
+          <EmptyState
+            icon={<ShoppingCart size={48} className="text-gray-400" />}
+            title="Your cart is empty"
+            description="Add some products to your cart to get started"
+            actionLabel="Continue Shopping"
+            onAction={handleContinueShopping}
+          />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className="space-y-4">
                 {items.map((cartItem: any) => (
                   <CartItemCard
-                    key={cartItem.productId}
+                    key={cartItem.product_id}
                     cartItem={cartItem}
                     onRemove={handleRemoveItem}
                     onQuantityChange={handleUpdateQuantity}
@@ -136,7 +130,7 @@ export const CartPage: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 };
