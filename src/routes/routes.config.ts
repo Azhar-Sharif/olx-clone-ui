@@ -11,6 +11,7 @@ export const publicRoutes = {
   register: '/register',
   products: '/products',
   productDetail: (id: string) => `/product/${id}`,
+  cart: '/cart',
 };
 
 export const errorRoutes = {
