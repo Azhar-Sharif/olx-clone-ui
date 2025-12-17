@@ -9,6 +9,7 @@ import {
   OrdersPage,
   ProductDetailPage,
   ProductsPage,
+  ProfilePage,
 } from '@components/pages';
 
 import { ProtectedRoute } from './ProtectedRoute';
@@ -43,6 +44,14 @@ export const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <OrderDetailPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/profile"
+      element={
+        <ProtectedRoute>
+          <ProfilePage />
         </ProtectedRoute>
       }
     />
