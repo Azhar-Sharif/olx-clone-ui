@@ -7,6 +7,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+  const cartItemCount = useAppSelector((state) => state.cart.totalQuantity);
 
   const handleLogout = () => {
     dispatch(logoutUser() as any);
@@ -15,6 +16,10 @@ export const Header = () => {
 
   const handleAuthClick = () => {
     navigate('/login');
+  };
+
+  const handleCartClick = () => {
+    navigate('/cart');
   };
 
   return (
@@ -32,8 +37,16 @@ export const Header = () => {
             <Search size={20} />
             <span className="hidden sm:inline">Search</span>
           </button>
-          <button className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+          <button
+            onClick={handleCartClick}
+            className="text-gray-600 hover:text-gray-900 flex items-center gap-2 relative"
+          >
             <ShoppingCart size={20} />
+            {cartItemCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {cartItemCount > 99 ? '99+' : cartItemCount}
+              </span>
+            )}
             <span className="hidden sm:inline">Cart</span>
           </button>
 

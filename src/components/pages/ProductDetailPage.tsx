@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@components/atoms';
 import { Header } from '@components/compounds';
-import { fetchProductById, useAppDispatch, useAppSelector } from '@store';
+import {
+  addToCart,
+  fetchProductById,
+  useAppDispatch,
+  useAppSelector,
+} from '@store';
 
 export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,8 +60,8 @@ export const ProductDetailPage = () => {
   }
 
   const handleAddToCart = () => {
-    console.log('Added to cart:', product);
-    alert(`${product.product_name} added to cart!`);
+    dispatch(addToCart({ product, quantity: 1 }));
+    toast.success('Added to cart!');
   };
 
   return (
@@ -109,7 +115,7 @@ export const ProductDetailPage = () => {
                     <div>
                       <p className="text-gray-600 text-sm mb-1">Seller</p>
                       <p className="text-lg font-semibold text-gray-900">
-                        {product.seller || 'Unknown'}
+                        {product.user_name || 'Unknown'}
                       </p>
                     </div>
 
