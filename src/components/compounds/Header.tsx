@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LogIn, LogOut, Search, ShoppingCart } from 'lucide-react';
+import { LogIn, LogOut, Package, Search, ShoppingCart } from 'lucide-react';
 
 import { logoutUser, useAppDispatch, useAppSelector } from '@store';
 
@@ -20,6 +20,10 @@ export const Header = () => {
 
   const handleCartClick = () => {
     navigate('/cart');
+  };
+
+  const handleOrdersClick = () => {
+    navigate('/orders');
   };
 
   return (
@@ -52,6 +56,14 @@ export const Header = () => {
 
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
+              <button
+                onClick={handleOrdersClick}
+                className="text-gray-600 hover:text-gray-900 flex items-center gap-2"
+              >
+                <Package size={20} />
+                <span className="hidden sm:inline">Orders</span>
+              </button>
+              <span className="text-gray-300">|</span>
               <span className="text-gray-700 font-medium">
                 {user?.email || 'User'}
               </span>
