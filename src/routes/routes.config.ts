@@ -2,7 +2,7 @@
  * Route Configuration
  *
  * Centralized routing configuration for the application.
- * This makes it easy to manage routes, add new ones, and maintain consistency.
+ * Separated into public (unprotected) and protected (authentication required) routes.
  */
 
 export const publicRoutes = {
@@ -12,6 +12,12 @@ export const publicRoutes = {
   products: '/products',
   productDetail: (id: string) => `/product/${id}`,
   cart: '/cart',
+};
+
+export const protectedRoutes = {
+  checkout: '/checkout',
+  orders: '/orders',
+  orderDetail: (id: string) => `/orders/${id}`,
 };
 
 export const errorRoutes = {
