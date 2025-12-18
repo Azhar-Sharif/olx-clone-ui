@@ -5,5 +5,6 @@ export * from './OrderCard';
 export * from './OrderItem';
 export * from './OrderSummary';
 export * from './ProductGrid';
+export * from './ProductsHeader';
 export * from './RegisterFormFields';
 export * from './StatusBadge';
