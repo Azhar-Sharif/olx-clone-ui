@@ -9,7 +9,6 @@ import {
   OrdersPage,
   PostProductPage,
   ProductDetailPage,
-  ProductsPage,
   ProfilePage,
 } from '@components/pages';
 
@@ -20,7 +19,6 @@ export const AppRoutes = () => (
     <Route path="/" element={<HomePage />} />
     <Route path="/register" element={<AuthPage type="register" />} />
     <Route path="/login" element={<AuthPage type="login" />} />
-    <Route path="/products" element={<ProductsPage />} />
     <Route path="/product/:id" element={<ProductDetailPage />} />
     <Route path="/cart" element={<CartPage />} />
 
