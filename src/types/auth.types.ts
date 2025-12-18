@@ -13,6 +13,14 @@ export interface IRegisterRequest {
   password: string;
 }
 
+export interface IProfileUpdateRequest {
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_no?: string;
+  address?: string;
+}
+
 export interface IUser {
   id: number;
   username: string;

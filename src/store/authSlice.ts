@@ -54,6 +54,17 @@ export const logoutUser = createAsyncThunk(
   },
 );
 
+export const updateUserProfile = createAsyncThunk(
+  'auth/updateUserProfile',
+  async (profileData: Types.IProfileUpdateRequest, { rejectWithValue }) => {
+    try {
+      return await authApi.updateProfile(profileData);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -108,6 +119,19 @@ const authSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || 'Logout failed';
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload || null;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || 'Profile update failed';
       });
   },
 });

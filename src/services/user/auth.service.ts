@@ -1,5 +1,4 @@
 import type * as Types from '@types';
-
 import {
   apiClient,
   getApiResponseData,
@@ -58,6 +57,26 @@ export const authApi = {
         return message;
       }
       throw new Error(response.data.message || 'Logout failed');
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
+
+  updateProfile: async (
+    profileData: Types.IProfileUpdateRequest,
+  ): Promise<Types.IAuthResponse> => {
+    try {
+      const response = await apiClient.put<Types.IApiResponse>(
+        '/user/profile/',
+        profileData,
+      );
+      if (isApiResponseSuccess(response.data)) {
+        const authData = getApiResponseData(response.data);
+        if (authData) {
+          return authData;
+        }
+      }
+      throw new Error(response.data.message || 'Profile update failed');
     } catch (error) {
       throw handleApiError(error);
     }

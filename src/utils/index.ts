@@ -1,3 +1,7 @@
 export * from './formValidation';
 export * from './productSubmission';
-export { validateLoginForm, validateRegisterForm } from './validators';
+export {
+  validateLoginForm,
+  validateProfileUpdate,
+  validateRegisterForm,
+} from './validators';

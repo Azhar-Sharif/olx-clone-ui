@@ -15,6 +15,14 @@ interface ILoginDataProps {
   password: string;
 }
 
+interface IProfileUpdateDataProps {
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_no?: string;
+  address?: string;
+}
+
 export const validateRegisterForm = (
   formData: IFormDataProps,
 ): Record<string, string> => {
@@ -59,5 +67,27 @@ export const validateLoginForm = (
 
   return errors;
 };
+
+export const validateProfileUpdate = (
+  formData: IProfileUpdateDataProps,
+): Record<string, string> => {
+  const errors: Record<string, string> = {};
+
+  if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    errors.email = 'Please enter a valid email address';
+  }
+
+  if (
+    formData.phone_no &&
+    !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(
+      formData.phone_no,
+    )
+  ) {
+    errors.phone_no = 'Please enter a valid phone number';
+  }
+
+  return errors;
+};
+
 export const hasFormErrors = (errors: Record<string, string>): boolean =>
   Object.keys(errors).length > 0;
