@@ -1,0 +1,1 @@
+export { useProductsWithCategory } from './useProductsWithCategory';
