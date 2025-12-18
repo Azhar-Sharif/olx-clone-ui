@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Award,
   Calendar,
+  Edit2,
   Mail,
   MapPin,
   Phone,
@@ -53,7 +54,7 @@ export const ProfilePage: React.FC = () => {
     `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.username;
   const initials = fullName
     .split(' ')
-    .map((n) => n.charAt(0).toUpperCase())
+    .map((n: string) => n.charAt(0).toUpperCase())
     .join('')
     .slice(0, 2);
 
@@ -108,13 +109,20 @@ export const ProfilePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100">
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 px-8 py-6">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 px-8 py-6 flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
                   <div className="p-2 bg-blue-500 rounded-lg">
                     <User size={24} className="text-white" />
                   </div>
                   Account Information
                 </h2>
+                <button
+                  onClick={() => navigate('/profile/edit')}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold text-sm"
+                >
+                  <Edit2 size={18} />
+                  Edit Profile
+                </button>
               </div>
 
               <div className="p-8">
