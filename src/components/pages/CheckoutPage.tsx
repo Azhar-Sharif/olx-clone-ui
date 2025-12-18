@@ -29,7 +29,7 @@ export const CheckoutPage: React.FC = () => {
             <div className="text-center">
               <p className="text-gray-600 text-lg mb-4">Your cart is empty</p>
               <Button
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/')}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
               >
                 Continue Shopping

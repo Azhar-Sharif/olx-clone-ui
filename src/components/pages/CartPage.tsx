@@ -39,7 +39,7 @@ export const CartPage: React.FC = () => {
   };
 
   const handleContinueShopping = () => {
-    navigate('/products');
+    navigate('/');
   };
 
   const handleClearCart = () => {

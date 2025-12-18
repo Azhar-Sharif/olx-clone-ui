@@ -145,7 +145,7 @@ export const PostProductPage: React.FC = () => {
         setFormData(getInitialFormData());
         setPreviewImg(null);
         setTimeout(() => {
-          navigate('/products');
+          navigate('/');
         }, 1500);
       } else if (result.payload?.message) {
         toast.error(result.payload?.message);
@@ -289,7 +289,7 @@ export const PostProductPage: React.FC = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/products')}
+              onClick={() => navigate('/')}
               disabled={isSubmitting}
               className="px-8 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-200 disabled:cursor-not-allowed text-gray-800 font-bold py-4 rounded-xl transition-all duration-200"
             >

@@ -133,7 +133,7 @@ export const OrderDetailPage: React.FC = () => {
 
         <div className="flex gap-4 mt-6">
           <Button
-            onClick={() => navigate('/products')}
+            onClick={() => navigate('/')}
             className="flex-1 bg-gray-200 text-gray-900 hover:bg-gray-300 px-4 py-3 rounded-lg font-semibold transition-colors"
           >
             Continue Shopping

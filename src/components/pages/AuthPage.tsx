@@ -16,7 +16,7 @@ export const AuthPage = ({ type }: IAuthPageProps) => {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   const handleSuccess = () => {
-    navigate('/products');
+    navigate('/');
   };
 
   const handleBackToHome = () => {
@@ -25,7 +25,7 @@ export const AuthPage = ({ type }: IAuthPageProps) => {
   };
 
   if (isAuthenticated) {
-    navigate('/products');
+    navigate('/');
   }
 
   return (

@@ -44,7 +44,7 @@ export const ProductDetailPage = () => {
         <div className="text-center">
           <p className="text-red-700 font-semibold mb-4">Product not found</p>
           <button
-            onClick={() => navigate('/products')}
+            onClick={() => navigate('/')}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Back to Products

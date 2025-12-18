@@ -34,7 +34,7 @@ export const OrdersPage: React.FC = () => {
   };
 
   const handleStartShopping = () => {
-    navigate('/products');
+    navigate('/');
   };
 
   return (
