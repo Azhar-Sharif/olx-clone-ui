@@ -8,5 +8,6 @@ export * from './OrderDetailPage';
 export * from './OrdersPage';
 export * from './PostProductPage';
 export * from './ProductDetailPage';
+export * from './ProductFormPage';
 export * from './ProfileEditPage';
 export * from './ProfilePage';

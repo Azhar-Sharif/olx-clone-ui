@@ -28,18 +28,34 @@ export const readFileAsDataURL = (file: File): Promise<string> =>
     reader.readAsDataURL(file);
   });
 
-export const getResultMessage = (result: any): string | null => {
-  if (result.success) {
-    return 'Product Posted successfully';
+export const getResultMessage = (
+  result: any,
+  isEditMode: boolean = false,
+): { message: string; isSuccess: boolean } => {
+  const failureDefault = isEditMode
+    ? 'Failed to update product'
+    : 'Failed to create product';
+  const successDefault = isEditMode
+    ? 'Product updated successfully'
+    : 'Product posted successfully';
+
+  if (result.payload?.success) {
+    return {
+      message: result.payload?.message || successDefault,
+      isSuccess: true,
+    };
   }
 
   if (result.payload?.message) {
-    return result.payload.message;
+    return { message: result.payload.message, isSuccess: false };
   }
 
   if (result.error?.message) {
-    return result.error.message || 'Failed to create product';
+    return {
+      message: result.error?.message || failureDefault,
+      isSuccess: false,
+    };
   }
 
-  return 'Failed to create product';
+  return { message: failureDefault, isSuccess: false };
 };
