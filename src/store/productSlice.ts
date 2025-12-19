@@ -48,6 +48,20 @@ export const createNewProduct = createAsyncThunk(
   },
 );
 
+export const updateProduct = createAsyncThunk(
+  'products/updateProduct',
+  async (
+    { id, data }: { id: number; data: Record<string, any> },
+    { rejectWithValue },
+  ) => {
+    try {
+      return await productService.updateProduct(id, data);
+    } catch (error: string | any) {
+      return rejectWithValue(error.message || 'Failed to update product');
+    }
+  },
+);
+
 const productSlice = createSlice({
   name: 'products',
   initialState,
@@ -104,6 +118,27 @@ const productSlice = createSlice({
       .addCase(createNewProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || 'Failed to create product';
+      })
+
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        if (action.payload && !Array.isArray(action.payload)) {
+          const idx = state.products.findIndex(
+            (p: any) => p.id === action.payload.id,
+          );
+          if (idx !== -1) {
+            state.products[idx] = action.payload;
+          }
+        }
+        state.error = null;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || 'Failed to update product';
       });
   },
 });

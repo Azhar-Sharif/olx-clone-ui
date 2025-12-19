@@ -4,7 +4,9 @@ import {
   AuthPage,
   CartPage,
   CheckoutPage,
+  EditProductPage,
   HomePage,
+  MyProductsPage,
   OrderDetailPage,
   OrdersPage,
   PostProductPage,
@@ -68,6 +70,22 @@ export const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <ProfileEditPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/my-products"
+      element={
+        <ProtectedRoute>
+          <MyProductsPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/edit-product/:id"
+      element={
+        <ProtectedRoute>
+          <EditProductPage />
         </ProtectedRoute>
       }
     />

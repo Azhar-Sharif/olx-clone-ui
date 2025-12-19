@@ -64,4 +64,31 @@ export const productService = {
       throw handleApiError(error);
     }
   },
+
+  updateProduct: async (
+    id: number,
+    data: Record<string, any>,
+  ): Promise<IApiResponse> => {
+    try {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        if (data[key] !== null && data[key] !== undefined) {
+          formData.append(key, data[key]);
+        }
+      });
+
+      const response = await apiClient.put<IApiResponse>(
+        `/products/${id}/`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
 };
