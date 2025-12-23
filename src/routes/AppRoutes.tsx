@@ -1,0 +1,93 @@
+import { Route, Routes } from 'react-router-dom';
+
+import {
+  AuthPage,
+  CartPage,
+  CheckoutPage,
+  EditProductPage,
+  HomePage,
+  MyProductsPage,
+  OrderDetailPage,
+  OrdersPage,
+  PostProductPage,
+  ProductDetailPage,
+  ProfileEditPage,
+  ProfilePage,
+} from '@components/pages';
+
+import { ProtectedRoute } from './ProtectedRoute';
+
+export const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<HomePage />} />
+    <Route path="/register" element={<AuthPage type="register" />} />
+    <Route path="/login" element={<AuthPage type="login" />} />
+    <Route path="/product/:id" element={<ProductDetailPage />} />
+    <Route path="/cart" element={<CartPage />} />
+
+    <Route
+      path="/checkout"
+      element={
+        <ProtectedRoute>
+          <CheckoutPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/post-product"
+      element={
+        <ProtectedRoute>
+          <PostProductPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/orders"
+      element={
+        <ProtectedRoute>
+          <OrdersPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/orders/:id"
+      element={
+        <ProtectedRoute>
+          <OrderDetailPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/profile"
+      element={
+        <ProtectedRoute>
+          <ProfilePage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/profile/edit"
+      element={
+        <ProtectedRoute>
+          <ProfileEditPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/my-products"
+      element={
+        <ProtectedRoute>
+          <MyProductsPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/edit-product/:id"
+      element={
+        <ProtectedRoute>
+          <EditProductPage />
+        </ProtectedRoute>
+      }
+    />
+  </Routes>
+);
